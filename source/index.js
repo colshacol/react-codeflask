@@ -4,7 +4,8 @@ import CodeFlask from "codeflask"
 class CodeFlaskReact extends React.Component {
   componentDidMount() {
     this.codeFlask = new CodeFlask(`#${this.props.id}`, {
-      language: this.props.language
+      language: this.props.language,
+      readonly: this.props.readonly
     })
 
     if (this.props.code) {
@@ -33,7 +34,9 @@ class CodeFlaskReact extends React.Component {
 
 CodeFlaskReact.defaultProps = {
   id: "react-codeflask-root",
-  language: "js"
+  language: "js",
+  readonly: false,
+  onChange: () => {}
 }
 
 export { CodeFlaskReact }
