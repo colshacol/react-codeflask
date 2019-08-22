@@ -8,6 +8,10 @@ class CodeFlaskReact extends React.Component {
       readonly: this.props.readonly
     })
 
+    if (this.props.readonly) {
+      this.codeFlask.enableReadonlyMode()
+    }
+
     if (this.props.code) {
       this.codeFlask.updateCode(this.props.code)
     }
