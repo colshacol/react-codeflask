@@ -1,35 +1,25 @@
 import React, { Component } from "react";
-import CodeFlask from "codeflask";
+import CodeFlask, { options } from "codeflask";
 
-interface Props {
+interface Props extends options {
   code: string;
-  editorRef: (codeFlask: CodeFlask) => void;
-  id: string;
-  language: string;
-  onChange: () => void;
-  readonly?: boolean;
+  editorRef?: (codeFlask: CodeFlask) => void;
+  id?: string;
+  onChange?: (code: string) => void;
 }
 
 class CodeFlaskReact extends Component<Props> {
   static defaultProps = {
     id: "react-codeflask-root",
-    language: "js",
-    readonly: false,
-    onChange: (): void => undefined,
   };
 
   private codeFlask?: CodeFlask;
 
   public componentDidMount(): void {
-    const { code, editorRef, id, language, onChange, readonly } = this.props;
-    this.codeFlask = new CodeFlask(`#${id}`, {
-      language: language,
-      readonly: readonly,
-    });
+    const { code, editorRef, id, onChange, ...options } = this.props;
+    this.codeFlask = new CodeFlask(`#${id}`, options);
 
-    if (code) {
-      this.codeFlask.updateCode(code);
-    }
+    this.codeFlask.updateCode(code);
 
     if (onChange) {
       this.codeFlask.onUpdate(onChange);
