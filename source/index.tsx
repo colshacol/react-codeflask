@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import CodeFlask, { options } from "codeflask";
 
-interface Props extends options {
+interface Props {
   code: string;
   editorRef?: (codeFlask: CodeFlask) => void;
   id?: string;
   onChange?: (code: string) => void;
 }
 
-class CodeFlaskReact extends Component<Props> {
+class CodeFlaskReact extends Component<Props & options> {
   static defaultProps = {
     id: "react-codeflask-root",
   };
